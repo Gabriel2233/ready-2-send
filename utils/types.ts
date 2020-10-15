@@ -1,4 +1,4 @@
-export type Message = {
+export interface Message {
   node: {
     messageContent: string;
     mostlyFor: string;
@@ -8,4 +8,9 @@ export type Message = {
       firstPublicationDate: string;
     };
   };
+}
+
+export type SearchContext = {
+  socialMediaBrands: Array<string>;
+  onSocialMediaChange(newValues: Array<string>): void;
 };

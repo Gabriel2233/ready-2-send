@@ -14,9 +14,13 @@ import { Message as MessageType } from "../utils/types";
 
 interface IProps {
   messageData: MessageType;
+  handleAddToFavorites(messageItemId: string): void;
 }
 
-export const Message: React.FC<IProps> = ({ messageData }) => {
+export const Message: React.FC<IProps> = ({
+  messageData,
+  handleAddToFavorites,
+}) => {
   const messageContent = messageData.node.messageContent;
 
   const { hasCopied, onCopy } = useClipboard(messageContent);
@@ -57,6 +61,7 @@ export const Message: React.FC<IProps> = ({ messageData }) => {
           m={4}
           cursor="pointer"
           fontSize={22}
+          onClick={() => handleAddToFavorites(messageData.node._meta.id)}
         />
       </Flex>
 
@@ -70,11 +75,7 @@ export const Message: React.FC<IProps> = ({ messageData }) => {
         </Heading>
       </Flex>
 
-      <Flex w="full" py={3} alignItems="center" justifyContent="space-between">
-        <Text mx={4} fontSize="md" color="gray.500">
-          {messageData.node.isDynamic ? "Dynamic 🎉" : "Normal"}
-        </Text>
-
+      <Flex w="full" py={3} alignItems="center" justifyContent="flex-end">
         <Button mx={4} onClick={onCopy}>
           <Icon as={FiCopy} mx={1} /> {hasCopied ? "Copied" : "Copy"}
         </Button>

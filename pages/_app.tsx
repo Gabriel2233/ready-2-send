@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { ThemeProvider, CSSReset, ColorModeProvider } from "@chakra-ui/core";
+import { SearchProvider } from "../contexts/searchContext";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
@@ -13,8 +14,10 @@ const MyApp = ({ Component, pageProps }) => {
             content="initial-scale=1.0, width=device-width"
           />
         </Head>
-        <Component {...pageProps} />
-        <CSSReset />
+        <SearchProvider>
+          <Component {...pageProps} />
+          <CSSReset />
+        </SearchProvider>
       </ColorModeProvider>
     </ThemeProvider>
   );
